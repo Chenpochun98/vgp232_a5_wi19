@@ -44,12 +44,12 @@ namespace Assignment5
             using (var writer = XmlWriter.Create(inventoryFile))
                 (new XmlSerializer(typeof(Inventory))).Serialize(writer, source);
 
-            using (var reader = new StreamReader(inventoryFile))
+            using (var read = new StreamReader(inventoryFile))
             {
                 var serializer = new XmlSerializer(typeof(Inventory));
                 try
                 {
-                    Inventory inventory = serializer.Deserialize(reader) as Inventory;
+                    Inventory inventory = serializer.Deserialize(read) as Inventory;
                     if (inventory != null)
                     {
                         foreach (var item in inventory.ItemToQuantity)
