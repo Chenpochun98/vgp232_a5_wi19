@@ -40,7 +40,7 @@ namespace Assignment5
         public void FindHighestDefense()
         {
             LoadTest();
-            pokedex=pokedex.Get
+            pokedex = pokedex.GetHighestDefense();
             Pokemon highestPokemon = pokedex.GetHighestDefense();
 
         }
@@ -48,7 +48,7 @@ namespace Assignment5
         [Test]
         public void FindHighestHp()
         {
-            pokedex.Load(testInputFile);
+            LoadTest();
             pokedex.Sort(Pokemon.CompareByPokemonHP);
             Pokemon highestPokemon = pokedex.GetHighestHP();
 
@@ -57,7 +57,7 @@ namespace Assignment5
         [Test]
         public void FindHighestAttack()
         {
-            pokedex.Load(testInputFile);
+            LoadTest();
             pokedex.Sort(Pokemon.CompareByPokemonAttack);
             Pokemon highestPokemon = pokedex.GetHighestAttack();
 
@@ -66,7 +66,7 @@ namespace Assignment5
         [Test]
         public void FindHighestMaxCp()
         {
-            pokedex.Load(testInputFile);
+            LoadTest();
             pokedex.Sort(Pokemon.CompareByPokemonMaxCP);
             Pokemon highestPokemon = pokedex.GetHighestMaxCP();
 
@@ -76,7 +76,7 @@ namespace Assignment5
         public void Load(int pokenum)
         {
             pokedex.Clear();
-            pokedex.Load(testInputFile);
+            LoadTest();
             Assert.AreEqual(pokenum, pokedex.Count);
         }
 
@@ -84,84 +84,12 @@ namespace Assignment5
         public void Save(int pokenum)
         {
             pokedex.Clear();
-            pokedex.Load(testInputFile);
+            LoadTest();
             pokedex.Save(testOutputFile, false);
             Assert.AreEqual(File.Exists(testOutputFile), true);
             Assert.AreEqual(pokenum, pokedex.Count);
         }
-
-        [TestCase(151)]
-        public void LoadCSV(int pokenum)
-        {
-            pokedex.Clear();
-            pokedex.Load(testInputFile);
-            Assert.AreEqual(pokenum, pokedex.Count);
-        }
-
-        [TestCase(151)]
-        public void SaveCSV(int pokenum)
-        {
-            pokedex.Clear();
-            pokedex.Load(testInputFile);
-            pokedex.Save(testOutputFile, false);
-            Assert.AreEqual(File.Exists(testOutputFile), true);
-            Assert.AreEqual(pokenum, pokedex.Count);
-        }
-
-        [TestCase(151)]
-        public void LoadXML(int pokenum)
-        {
-            string appDir = AppContext.BaseDirectory;
-            testOutputFile = Path.Combine(appDir, TEST_XML_DATA_OUTPUT_FILE);
-            testInputFile = Path.Combine(appDir, TEST_XML_DATA_INPUT_FILE);
-
-            pokedex.Clear();
-            pokedex.Load(testInputFile);
-            Assert.AreEqual(File.Exists(testOutputFile), true);
-        }
-
-        [TestCase(151)]
-        public void SaveXML(int pokenum)
-        {
-            string appDir = AppContext.BaseDirectory;
-            testOutputFile = Path.Combine(appDir, TEST_XML_DATA_OUTPUT_FILE);
-            testInputFile = Path.Combine(appDir, TEST_XML_DATA_INPUT_FILE);
-
-            pokedex.Clear();
-            pokedex.Load(testInputFile);
-            pokedex.Save(testOutputFile, false);
-            Assert.AreEqual(File.Exists(testOutputFile), true);
-
-        }
-
-        [TestCase(151)]
-        public void LoadJSON(int pokenum)
-        {
-            string appDir = AppContext.BaseDirectory;
-            testOutputFile = Path.Combine(appDir, TEST_JSON_DATA_OUTPUT_FILE);
-            testInputFile = Path.Combine(appDir, TEST_JSON_DATA_INPUT_FILE);
-
-
-            pokedex.Clear();
-            pokedex.Load(testInputFile);
-            Assert.AreEqual(File.Exists(testOutputFile), true);
-        }
-
-        [TestCase(151)]
-        public void SaveJSON(int pokenum)
-        {
-
-            string appDir = AppContext.BaseDirectory;
-            testOutputFile = Path.Combine(appDir, TEST_JSON_DATA_OUTPUT_FILE);
-            testInputFile = Path.Combine(appDir, TEST_JSON_DATA_INPUT_FILE);
-
-            pokedex.Clear();
-            pokedex.Load(testInputFile);
-            pokedex.Save(testOutputFile, false);
-            Assert.AreEqual(File.Exists(testOutputFile), true);
-
-        }
-
+        
         [SetUp]
         public void Setup()
         {
